@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "echarts": "^5.4.3",
+    "postcss-px-to-viewport": "^1.1.1",
     "vue": "^3.3.4"
   },
   "devDependencies": {

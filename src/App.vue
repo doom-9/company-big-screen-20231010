@@ -1415,194 +1415,150 @@ const handleVip2ECharts = () => {
 
 const handleMatchStoreCharts = () => {
   let option = {
-    backgroundColor: "#174973",
     title: {
-      text: "分区受理情况",
-      top: "5%",
-      left: "center",
-      textStyle: {
-        color: "#FFF",
-        align: "center",
-      },
-    },
-    grid: {
-      show: true,
-      left: "5%",
-      right: "5%",
-      top: "20%",
-      bottom: "5%",
-      containLabel: true,
-      backgroundColor: "rgba(0,0,0,0.1)",
+      text: "漏斗图",
+      subtext: "纯属虚构",
     },
     tooltip: {
-      show: true,
       trigger: "item",
+      formatter: "{a} <br/>{b} : {c}%",
+    },
+    toolbox: {
+      feature: {
+        dataView: {
+          readOnly: false,
+        },
+        restore: {},
+        saveAsImage: {},
+      },
     },
     legend: {
-      show: true,
-      top: "10%",
-      right: 20,
-      icon: "rect",
-      itemWidth: 22,
-      itemHeight: 3,
-      textStyle: {
-        color: "#fff",
-      },
-      data: ["大户", "市中"],
+      // data: ['展现','点击','访问','咨询','订单']
+      data: ["访问", "点击", "展现"],
     },
-    xAxis: [
-      {
-        type: "category",
-        boundaryGap: false,
-        axisLabel: {
-          color: "#fff",
-        },
-        axisLine: {
-          show: true,
-          lineStyle: {
-            color: "rgba(0, 204, 255, 0.5)",
-          },
-        },
-        axisTick: {
-          show: false,
-        },
-        splitLine: {
-          show: false,
-        },
-        data: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"],
-      },
-    ],
-    yAxis: [
-      {
-        type: "value",
-        name: "",
-        axisLabel: {
-          formatter: "{value}",
-          textStyle: {
-            color: "#fff",
-          },
-        },
-        axisLine: {
-          lineStyle: {
-            color: "rgba(0, 204, 255, 0.5)",
-          },
-        },
-        axisTick: {
-          show: false,
-        },
-        splitLine: {
-          show: true,
-          lineStyle: {
-            color: "rgba(244, 244, 244, 0.2)",
-          },
-        },
-      },
-      {
-        type: "value",
-        name: "",
-        axisLabel: {
-          formatter: "{value} %",
-          textStyle: {
-            color: "#fff",
-          },
-        },
-        axisLine: {
-          lineStyle: {
-            color: "rgba(0, 204, 255, 0.5)",
-          },
-        },
-        axisTick: {
-          show: false,
-        },
-        splitLine: {
-          show: true,
-          lineStyle: {
-            color: "rgba(244, 244, 244, 0.3)",
-          },
-        },
-      },
-    ],
+    calculable: true,
     series: [
       {
-        name: "大户",
-        type: "line",
-        stack: "总量",
-        symbol: "circle",
-        symbolSize: 9,
-        itemStyle: {
+        name: "漏斗图",
+        type: "funnel",
+        left: "10%",
+        // top: 60,
+        //x2: 80,
+        // bottom: 60,
+        // width: '80%',
+        // height: {totalHeight} - y - y2,
+        // min: 0,
+        // max: 100,
+        // minSize: '0%',
+        // maxSize: '100%',
+        // sort: 'descending',
+        sort: "ascending",
+        // gap: 2, // 三角形之间的间距
+        // label: {
+        //     show: true,
+        //     position: 'inside',
+        // },
+        label: {
           normal: {
-            color: {
-              type: "linear",
-              x: 0,
-              y: 0,
-              x2: 0,
-              y2: 1,
-              colorStops: [
-                {
-                  offset: 0,
-                  color: "#E7FF01", // 0% 处的颜色
-                },
-                {
-                  offset: 1,
-                  color: "#86F028", // 100% 处的颜色
-                },
-              ],
-              global: false, // 缺省为 false
+            position: "inside",
+            padding: [0, 0, -80, 0],
+            formatter: function (params) {
+              var text = "";
+              switch (params.name) {
+                //         formatter: [
+                //     '    {d|●}',
+                //     ' {a|{c}%}     \n',
+                //     '    {b|}'
+                // ].join(','),
+                case "个人完税证明开具":
+                  text = "{a|779}{b|笔}\n{c|个人完税证明开具}";
+                  break;
+                case "自然人登记":
+                  text = "{a|32652}{b|笔}\n{c|自然人登记}";
+                  break;
+                case "申报总量":
+                  text = "{a|217966}{b|笔}\n{c|申报总量}";
+                  break;
+              }
+              return text;
             },
-            lineStyle: {
-              color: "#86F028",
-              width: 1,
+            rich: {
+              a: {
+                color: "#fdde2c",
+                fontSize: "28",
+                align: "center",
+                border: 0,
+              },
+              b: {
+                fontSize: "14",
+                color: "#fff",
+                border: 0,
+              },
+              c: {
+                color: "#fff",
+                fontSize: "14",
+                align: "center",
+                border: 0,
+              },
+            },
+            // textStyle: {
+            //     color: 'blue'
+            // }
+          },
+          // emphasis: {
+          //     position:'inside',
+          //     formatter: '{b}实际: {c}%'
+          // }
+        },
+        // labelLine: {
+        //     show: false,
+        //     length: 10,
+        //     lineStyle: {
+        //         width: 1,
+        //         type: 'solid'
+        //     }
+        // },
+        // itemStyle: {
+        //     // show: false,
+        //     borderColor: 'red',
+        //     borderWidth: 0
+        // },
+        // emphasis: {
+        //     label: {
+        //         fontSize: 20
+        //     }
+        // },
+        data: [
+          // {value: 20, name: '订单'},
+          // {value: 40, name: '咨询'},
+          {
+            value: 30,
+            name: "个人完税证明开具",
+            itemStyle: {
+              color: "#4BC4A2",
             },
           },
-        },
-        markPoint: {
-          itemStyle: {
-            normal: {
-              color: "red",
+          {
+            value: 60,
+            name: "自然人登记",
+            itemStyle: {
+              color: "#4E6EDF",
             },
           },
-        },
-        data: [120, 132, 101, 134, 90, 230, 210, 182, 191, 234, 260, 280],
-      },
-      {
-        name: "市中",
-        type: "line",
-        stack: "总量",
-        symbol: "circle",
-        symbolSize: 9,
-        itemStyle: {
-          normal: {
-            color: {
-              type: "linear",
-              x: 0,
-              y: 0,
-              x2: 0,
-              y2: 1,
-              colorStops: [
-                {
-                  offset: 0,
-                  color: "#00FFFF", // 0% 处的颜色
-                },
-                {
-                  offset: 1,
-                  color: "#0099FF", // 100% 处的颜色
-                },
-              ],
-              global: false, // 缺省为 false
-            },
-            lineStyle: {
-              color: "#3CDBFF",
-              width: 1,
+          {
+            value: 90,
+            name: "申报总量",
+            itemStyle: {
+              color: "#3E4C9E",
             },
           },
-        },
-        data: [220, 182, 191, 210, 230, 270, 270, 201, 154, 140, 240, 250],
+        ],
       },
     ],
   };
 
-  const vip2Charts = echarts.init(document.getElementById("vip2"));
-  vip2Charts.setOption(option);
+  const razCharts = echarts.init(document.getElementById("razing"));
+  razCharts.setOption(option);
 };
 
 const handleMatchAgeCharts = () => {
@@ -2083,7 +2039,7 @@ onMounted(() => {
   handleMapECharts();
   handleVip1ECharts();
   handleVip2ECharts();
-  // handleMatchStoreCharts();
+  handleMatchStoreCharts();
   handleMatchAgeCharts();
   handleMatchTrendCharts();
 
