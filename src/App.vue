@@ -2333,7 +2333,7 @@ onMounted(() => {
         justify-content: space-between;
 
         .vip1 {
-          width: 300px;
+          width: 350px;
           height: 200px;
         }
 
@@ -2375,7 +2375,7 @@ onMounted(() => {
         }
 
         .vip2 {
-          width: 300px;
+          width: 350px;
           height: 200px;
         }
       }

@@ -13,6 +13,8 @@ RUN yarn install --frozen-lockfile && \
 
 FROM pierrezemb/gostatic
 
+EXPOSE 8043
+
 COPY --from=builder /app/dist /srv/http/
 
 CMD ["-enable-logging","-fallback","index.html"]
