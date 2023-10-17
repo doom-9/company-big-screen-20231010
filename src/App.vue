@@ -1074,31 +1074,31 @@ const handleMapECharts = () => {
 };
 
 const handleVip1ECharts = () => {
-  let scale = 1;
+  let scale = 0.8;
   let echartData = [
     {
       value: 2154,
-      name: "税务登记",
+      name: "球员",
     },
     {
       value: 3854,
-      name: "发票管理",
+      name: "裁判员",
     },
     {
       value: 3515,
-      name: "纳税申报",
+      name: "教练员",
     },
     {
       value: 3515,
-      name: "行政处罚",
+      name: "媒体",
     },
     {
       value: 3854,
-      name: "资格认定",
+      name: "培训机构",
     },
     {
       value: 2154,
-      name: "其他合计",
+      name: "球迷",
     },
   ];
   let rich = {
@@ -1134,7 +1134,7 @@ const handleVip1ECharts = () => {
   let option = {
     backgroundColor: "transparent",
     title: {
-      text: "实体办税工作量",
+      text: "",
       left: "center",
       top: "53%",
       padding: [24, 0],
@@ -1194,10 +1194,11 @@ const handleVip1ECharts = () => {
                 "{white|" +
                 params.name +
                 "}\n{hr|}\n{yellow|" +
-                params.value +
-                "}\n{blue|" +
-                percent +
-                "%}"
+                params.value / 10000 +"万"+
+                "}"
+                // \n{blue|" +
+                // percent +
+                // "%}"
               );
             },
             rich: rich,
@@ -1416,21 +1417,21 @@ const handleVip2ECharts = () => {
 const handleMatchStoreCharts = () => {
   let option = {
     title: {
-      text: "漏斗图",
-      subtext: "纯属虚构",
+      // text: "漏斗图",
+      // subtext: "纯属虚构",
     },
     tooltip: {
       trigger: "item",
       formatter: "{a} <br/>{b} : {c}%",
     },
     toolbox: {
-      feature: {
-        dataView: {
-          readOnly: false,
-        },
-        restore: {},
-        saveAsImage: {},
-      },
+      // feature: {
+      //   dataView: {
+      //     readOnly: false,
+      //   },
+      //   restore: {},
+      //   saveAsImage: {},
+      // },
     },
     legend: {
       // data: ['展现','点击','访问','咨询','订单']
@@ -1461,15 +1462,10 @@ const handleMatchStoreCharts = () => {
         label: {
           normal: {
             position: "inside",
-            padding: [0, 0, -80, 0],
+            padding: [0, 0, 0, 0],
             formatter: function (params) {
               var text = "";
               switch (params.name) {
-                //         formatter: [
-                //     '    {d|●}',
-                //     ' {a|{c}%}     \n',
-                //     '    {b|}'
-                // ].join(','),
                 case "个人完税证明开具":
                   text = "{a|779}{b|笔}\n{c|个人完税证明开具}";
                   break;
@@ -1485,7 +1481,7 @@ const handleMatchStoreCharts = () => {
             rich: {
               a: {
                 color: "#fdde2c",
-                fontSize: "28",
+                fontSize: "14",
                 align: "center",
                 border: 0,
               },
