@@ -347,3 +347,13 @@ template {
 [hidden] {
   display: none;
 }
+
+@font-face {
+  font-family: PangMenZhengDao;
+  src: url('./assets/PangMenZhengDaoBiaoTiTiMianFeiBan-2.ttf');
+}
+
+@font-face {
+  font-family: PingFang SC;
+  src: url('./assets/PingFang-SC.ttf');
+}

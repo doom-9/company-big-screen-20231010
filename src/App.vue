@@ -826,8 +826,8 @@ const handleMapECharts = () => {
           color: "#000",
           decoration: "none",
         },
-        backgroundColor: 'transparent',
-        borderColor: 'transparent',
+        backgroundColor: "transparent",
+        borderColor: "transparent",
         // position: function (point, params, dom, rect, size) {
         //   return [point[0], point[1]];
         // },
@@ -1130,7 +1130,7 @@ const handleMapECharts = () => {
 };
 
 const handleVip1ECharts = () => {
-  let scale = 0.8;
+  let scale = 1;
   let echartData = [
     {
       value: 2154,
@@ -1160,7 +1160,7 @@ const handleVip1ECharts = () => {
   let rich = {
     yellow: {
       color: "#ffc72b",
-      fontSize: 30 * scale,
+      fontSize: 12 * scale,
       padding: [5, 4],
       align: "center",
     },
@@ -1173,7 +1173,7 @@ const handleVip1ECharts = () => {
       color: "#fff",
       align: "center",
       fontSize: 14 * scale,
-      padding: [21, 0],
+      padding: [2, 0],
     },
     blue: {
       color: "#49dff0",
@@ -1200,34 +1200,34 @@ const handleVip1ECharts = () => {
         align: "center",
       },
     },
-    legend: {
-      selectedMode: false,
-      formatter: function (name) {
-        let total = 0; //各科正确率总和
-        let averagePercent; //综合正确率
-        echartData.forEach(function (value, index, array) {
-          total += value.value;
-        });
-        return "{total|" + total + "}";
-      },
-      data: [echartData[0].name],
-      // data: ['高等教育学'],
-      // itemGap: 50,
-      left: "center",
-      top: "center",
-      icon: "none",
-      align: "center",
-      textStyle: {
-        color: "#fff",
-        fontSize: 16 * scale,
-        rich: rich,
-      },
-    },
+    // legend: {
+    //   selectedMode: false,
+    //   formatter: function (name) {
+    //     let total = 0; //各科正确率总和
+    //     let averagePercent; //综合正确率
+    //     echartData.forEach(function (value, index, array) {
+    //       total += value.value;
+    //     });
+    //     return "{total|" + total + "}";
+    //   },
+    //   data: [echartData[0].name],
+    //   // data: ['高等教育学'],
+    //   // itemGap: 50,
+    //   left: "center",
+    //   top: "center",
+    //   icon: "none",
+    //   align: "center",
+    //   textStyle: {
+    //     color: "#fff",
+    //     fontSize: 16 * scale,
+    //     rich: rich,
+    //   },
+    // },
     series: [
       {
         name: "实体办税工作量",
         type: "pie",
-        radius: ["42%", "50%"],
+        radius: ["30%", "50%"],
         hoverAnimation: false,
         color: [
           "#c487ee",
@@ -1282,23 +1282,13 @@ const handleVip1ECharts = () => {
 const handleVip2ECharts = () => {
   let option = {
     backgroundColor: "transparent",
-    title: {
-      text: "",
-      top: "5%",
-      left: "center",
-      textStyle: {
-        color: "#FFF",
-        align: "center",
-      },
-    },
     grid: {
-      show: true,
+      // show: true,
       left: "5%",
       right: "5%",
       top: "20%",
       bottom: "5%",
       containLabel: true,
-      backgroundColor: "rgba(0,0,0,0.1)",
     },
     tooltip: {
       show: true,
@@ -1312,7 +1302,7 @@ const handleVip2ECharts = () => {
       itemWidth: 22,
       itemHeight: 3,
       textStyle: {
-        color: "#fff",
+        color: "#9FA6B1",
       },
       data: ["活跃", "新增"],
     },
@@ -1335,7 +1325,7 @@ const handleVip2ECharts = () => {
         splitLine: {
           show: false,
         },
-        data: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"],
+        data: ["10.1", "10.2", "10.3", "10.4", "10.5"],
       },
     ],
     yAxis: [
@@ -1363,30 +1353,30 @@ const handleVip2ECharts = () => {
           },
         },
       },
-      {
-        type: "value",
-        name: "",
-        axisLabel: {
-          formatter: "{value} %",
-          textStyle: {
-            color: "#fff",
-          },
-        },
-        axisLine: {
-          lineStyle: {
-            color: "rgba(0, 204, 255, 0.5)",
-          },
-        },
-        axisTick: {
-          show: false,
-        },
-        splitLine: {
-          show: true,
-          lineStyle: {
-            color: "rgba(244, 244, 244, 0.3)",
-          },
-        },
-      },
+      // {
+      //   type: "value",
+      //   name: "",
+      //   axisLabel: {
+      //     formatter: "{value} %",
+      //     textStyle: {
+      //       color: "#fff",
+      //     },
+      //   },
+      //   axisLine: {
+      //     lineStyle: {
+      //       color: "rgba(0, 204, 255, 0.5)",
+      //     },
+      //   },
+      //   axisTick: {
+      //     show: false,
+      //   },
+      //   splitLine: {
+      //     show: true,
+      //     lineStyle: {
+      //       color: "rgba(244, 244, 244, 0.3)",
+      //     },
+      //   },
+      // },
     ],
     series: [
       {
