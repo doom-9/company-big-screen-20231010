@@ -4,7 +4,7 @@ import * as echarts from "echarts";
 import { mapJson } from "./assets/map";
 
 const handlePlayerECharts = () => {
-  let playerXLabel = ["语文", "数学", "英语", "科学", "历史"];
+  let playerXLabel = ["U12", "U13", "U14", "U15", "U16", "U17", "U18", "U19"];
   let playerOption = {
     tooltip: {},
     backgroundColor: "transparent",
@@ -86,7 +86,7 @@ const handlePlayerECharts = () => {
             ]),
           },
         },
-        data: [20, 80, 100, 40, 34, 90, 60],
+        data: [20, 80, 100, 40, 34, 90, 60, 60],
         z: 10,
         zlevel: 0,
         label: {
@@ -113,7 +113,7 @@ const handlePlayerECharts = () => {
         symbolPosition: "start",
         symbolOffset: [0, -1],
         // symbolBoundingData: this.total,
-        data: [20, 80, 100, 40, 34, 90, 60],
+        data: [20, 80, 100, 40, 34, 90, 60, 60],
         width: 25,
         z: 0,
         zlevel: 1,
@@ -126,7 +126,7 @@ const handlePlayerECharts = () => {
 };
 
 const handleTrialECharts = () => {
-  let salvProName = ["安徽省", "河南省", "浙江省", "湖北省"];
+  let salvProName = ["国际级", "国家级", "一级", "二级"];
   let salvProValue = [239, 181, 154, 144];
   let salvProMax = []; //背景按最大值
   for (let i = 0; i < salvProValue.length; i++) {
@@ -243,7 +243,7 @@ const handleCoachECharts = () => {
       right: "8%",
     },
     xAxis: {
-      data: ["驯鹿", "火箭", "飞机", "高铁", "轮船", "汽车", "跑步", "步行"],
+      data: ["A级", "B级", "C级", "D级", "E级"],
       axisTick: {
         show: false,
       },
@@ -1185,7 +1185,7 @@ const handleVip1ECharts = () => {
           normal: {
             formatter: function (params, ticket, callback) {
               let total = 0; //考生总数量
-              let percent = 0; //考生占比
+              let percent = "0"; //考生占比
               echartData.forEach(function (value, index, array) {
                 total += value.value;
               });
@@ -1194,7 +1194,8 @@ const handleVip1ECharts = () => {
                 "{white|" +
                 params.name +
                 "}\n{hr|}\n{yellow|" +
-                params.value / 10000 +"万"+
+                (params.value / 10000).toFixed(1) +
+                "万" +
                 "}"
                 // \n{blue|" +
                 // percent +
@@ -1226,7 +1227,7 @@ const handleVip2ECharts = () => {
   let option = {
     backgroundColor: "transparent",
     title: {
-      text: "分区受理情况",
+      text: "",
       top: "5%",
       left: "center",
       textStyle: {
@@ -1257,7 +1258,7 @@ const handleVip2ECharts = () => {
       textStyle: {
         color: "#fff",
       },
-      data: ["大户", "市中"],
+      data: ["活跃", "新增"],
     },
     xAxis: [
       {
@@ -1333,7 +1334,7 @@ const handleVip2ECharts = () => {
     ],
     series: [
       {
-        name: "大户",
+        name: "活跃",
         type: "line",
         stack: "总量",
         symbol: "circle",
@@ -1374,7 +1375,7 @@ const handleVip2ECharts = () => {
         data: [120, 132, 101, 134, 90, 230, 210, 182, 191, 234, 260, 280],
       },
       {
-        name: "市中",
+        name: "新增",
         type: "line",
         stack: "总量",
         symbol: "circle",
@@ -1443,107 +1444,70 @@ const handleMatchStoreCharts = () => {
         name: "漏斗图",
         type: "funnel",
         left: "10%",
-        // top: 60,
-        //x2: 80,
-        // bottom: 60,
-        // width: '80%',
-        // height: {totalHeight} - y - y2,
-        // min: 0,
-        // max: 100,
-        // minSize: '0%',
-        // maxSize: '100%',
-        // sort: 'descending',
         sort: "ascending",
-        // gap: 2, // 三角形之间的间距
-        // label: {
-        //     show: true,
-        //     position: 'inside',
-        // },
+        gap: 5, // 三角形之间的间距
         label: {
-          normal: {
-            position: "inside",
-            padding: [0, 0, 0, 0],
-            formatter: function (params) {
-              var text = "";
-              switch (params.name) {
-                case "个人完税证明开具":
-                  text = "{a|779}{b|笔}\n{c|个人完税证明开具}";
-                  break;
-                case "自然人登记":
-                  text = "{a|32652}{b|笔}\n{c|自然人登记}";
-                  break;
-                case "申报总量":
-                  text = "{a|217966}{b|笔}\n{c|申报总量}";
-                  break;
-              }
-              return text;
-            },
-            rich: {
-              a: {
-                color: "#fdde2c",
-                fontSize: "14",
-                align: "center",
-                border: 0,
-              },
-              b: {
-                fontSize: "14",
-                color: "#fff",
-                border: 0,
-              },
-              c: {
-                color: "#fff",
-                fontSize: "14",
-                align: "center",
-                border: 0,
-              },
-            },
-            // textStyle: {
-            //     color: 'blue'
-            // }
-          },
-          // emphasis: {
-          //     position:'inside',
-          //     formatter: '{b}实际: {c}%'
-          // }
+          show: true,
+          position: "inside",
         },
-        // labelLine: {
-        //     show: false,
-        //     length: 10,
-        //     lineStyle: {
-        //         width: 1,
-        //         type: 'solid'
-        //     }
-        // },
-        // itemStyle: {
-        //     // show: false,
-        //     borderColor: 'red',
-        //     borderWidth: 0
-        // },
-        // emphasis: {
-        //     label: {
-        //         fontSize: 20
-        //     }
+        // label: {
+        //   normal: {
+        //     position: "inside",
+        //     padding: [0, 0, 0, 0],
+        //     formatter: function (params) {
+        //       var text = "";
+        //       switch (params.name) {
+        //         case "个人完税证明开具":
+        //           text = "{a|779}{b|笔}\n{c|个人完税证明开具}";
+        //           break;
+        //         case "自然人登记":
+        //           text = "{a|32652}{b|笔}\n{c|自然人登记}";
+        //           break;
+        //         case "申报总量":
+        //           text = "{a|217966}{b|笔}\n{c|申报总量}";
+        //           break;
+        //       }
+        //       return text;
+        //     },
+        //     rich: {
+        //       a: {
+        //         color: "#fdde2c",
+        //         fontSize: "14",
+        //         align: "center",
+        //         border: 0,
+        //       },
+        //       b: {
+        //         fontSize: "14",
+        //         color: "#fff",
+        //         border: 0,
+        //       },
+        //       c: {
+        //         color: "#fff",
+        //         fontSize: "14",
+        //         align: "center",
+        //         border: 0,
+        //       },
+        //     },
+        //   },
         // },
         data: [
-          // {value: 20, name: '订单'},
-          // {value: 40, name: '咨询'},
           {
             value: 30,
-            name: "个人完税证明开具",
+            name: "A库",
             itemStyle: {
               color: "#4BC4A2",
             },
           },
           {
             value: 60,
-            name: "自然人登记",
+            name: "B库",
             itemStyle: {
               color: "#4E6EDF",
             },
           },
           {
             value: 90,
-            name: "申报总量",
+            name: "C库",
             itemStyle: {
               color: "#3E4C9E",
             },
@@ -1560,7 +1524,7 @@ const handleMatchStoreCharts = () => {
 const handleMatchAgeCharts = () => {
   let option = {
     title: {
-      text: "南丁格尔玫瑰图",
+      // text: "南丁格尔玫瑰图",
       x: "center",
     },
     color: [
@@ -1577,36 +1541,35 @@ const handleMatchAgeCharts = () => {
       trigger: "item",
       formatter: "{a} <br/>{b} : {c} ({d}%)",
     },
-    toolbox: {
-      show: true,
-      feature: {
-        mark: { show: true },
-        dataView: { show: true, readOnly: false },
-        magicType: {
-          show: true,
-          type: ["pie", "funnel"],
-        },
-        restore: { show: true },
-        saveAsImage: { show: true },
-      },
-    },
+    // toolbox: {
+    //   show: true,
+    //   feature: {
+    //     mark: { show: true },
+    //     dataView: { show: true, readOnly: false },
+    //     magicType: {
+    //       show: true,
+    //       type: ["pie", "funnel"],
+    //     },
+    //     restore: { show: true },
+    //     saveAsImage: { show: true },
+    //   },
+    // },
     calculable: true,
     series: [
       {
-        name: "增值电信业务统计表",
+        name: "比赛年龄分布",
         type: "pie",
         radius: [40, 150],
-
         roseType: "area",
         data: [
-          { value: 10, name: "rose1" },
-          { value: 5, name: "rose2" },
-          { value: 15, name: "rose3" },
-          { value: 25, name: "rose4" },
-          { value: 20, name: "rose5" },
-          { value: 35, name: "rose6" },
-          { value: 30, name: "rose7" },
-          { value: 40, name: "rose8" },
+          { value: 10, name: "U12" },
+          { value: 5, name: "U13" },
+          { value: 15, name: "U14" },
+          { value: 25, name: "U15" },
+          { value: 20, name: "U16" },
+          { value: 35, name: "U17" },
+          { value: 30, name: "U18" },
+          { value: 40, name: "U19" },
         ],
       },
     ],
@@ -1618,305 +1581,33 @@ const handleMatchAgeCharts = () => {
 
 const handleMatchTrendCharts = () => {
   let option = {
-    backgroundColor: "transparent",
-    color: ["#27d391", "#eddb76", "#fe3838", "#27d391"],
-    legend: {
-      top: 10,
-      left: "center",
-      textStyle: {
-        color: "#97b8d8",
-      },
-      data: ["优", "良", "差", "无"],
+    xAxis: {
+      type: "category",
+      data: [
+        "1月",
+        "2月",
+        "3月",
+        "4月",
+        "5月",
+        "6月",
+        "7月",
+        "8月",
+        "9月",
+        "10月",
+        "11月",
+        "12月",
+      ],
     },
-    tooltip: {
-      trigger: "axis",
-      axisPointer: {
-        type: "cross",
-      },
+    yAxis: {
+      type: "value",
     },
-    xAxis: [
-      {
-        gridIndex: 0,
-        axisLabel: {
-          show: false,
-        },
-        axisTick: {
-          show: false,
-        },
-        axisLine: {
-          lineStyle: {
-            color: "rgba(151,184,216,0.5)",
-            type: "dashed",
-          },
-        },
-        type: "category",
-        boundaryGap: false,
-        data: [
-          "站点1",
-          "站点2",
-          "站点3",
-          "站点4",
-          "站点5",
-          "站点6",
-          "站点5",
-          "站点7",
-          "站点8",
-          "站点9",
-          "站点9",
-          "z郑州",
-        ],
-      },
-      {
-        gridIndex: 1,
-        axisLabel: {
-          show: false,
-        },
-        axisTick: {
-          show: false,
-        },
-        axisLine: {
-          lineStyle: {
-            color: "rgba(151,184,216,0.5)",
-            type: "dashed",
-          },
-        },
-        type: "category",
-        boundaryGap: false,
-        data: [
-          "站点1",
-          "站点2",
-          "站点3",
-          "站点4",
-          "站点5",
-          "站点6",
-          "站点5",
-          "站点7",
-          "站点8",
-          "站点9",
-          "站点9",
-          "z郑州",
-        ],
-      },
-      {
-        gridIndex: 2,
-        axisLabel: {
-          show: false,
-        },
-        axisTick: {
-          show: false,
-        },
-        axisLine: {
-          lineStyle: {
-            color: "rgba(151,184,216,0.5)",
-            type: "dashed",
-          },
-        },
-        type: "category",
-        boundaryGap: false,
-        data: [
-          "站点1",
-          "站点2",
-          "站点3",
-          "站点4",
-          "站点5",
-          "站点6",
-          "站点5",
-          "站点7",
-          "站点8",
-          "站点9",
-          "站点9",
-          "z郑州",
-        ],
-      },
-      {
-        gridIndex: 3,
-        axisLine: {
-          lineStyle: {
-            color: "#97b8d8",
-          },
-        },
-        axisLabel: {
-          color: "#97b8d8",
-          fontSize: 14,
-        },
-        type: "category",
-        boundaryGap: false,
-        data: [
-          "站点1",
-          "站点2",
-          "站点3",
-          "站点4",
-          "站点5",
-          "站点6",
-          "站点5",
-          "站点7",
-          "站点8",
-          "站点9",
-          "站点9",
-          "z郑州",
-        ],
-      },
-    ],
-    yAxis: [
-      {
-        gridIndex: 0,
-        axisLabel: {
-          show: false,
-        },
-        axisTick: {
-          show: false,
-        },
-        axisLine: {
-          show: false,
-        },
-        splitLine: {
-          show: false,
-        },
-        splitNumber: 1,
-        name: "优",
-        nameLocation: "center",
-        nameTextStyle: {
-          color: "#97b8d8",
-          fontSize: 14,
-        },
-        nameRotate: 360,
-      },
-      {
-        gridIndex: 1,
-        axisLabel: {
-          show: false,
-        },
-        axisTick: {
-          show: false,
-        },
-        axisLine: {
-          show: false,
-        },
-        splitLine: {
-          show: false,
-        },
-        splitNumber: 1,
-        name: "良",
-        nameLocation: "center",
-        nameTextStyle: {
-          color: "#97b8d8",
-          fontSize: 14,
-        },
-        nameRotate: 360,
-      },
-      {
-        gridIndex: 2,
-        axisLabel: {
-          show: false,
-        },
-        axisTick: {
-          show: false,
-        },
-        axisLine: {
-          show: false,
-        },
-        splitLine: {
-          show: false,
-        },
-        splitNumber: 1,
-        name: "差",
-        nameLocation: "center",
-        nameTextStyle: {
-          color: "#97b8d8",
-          fontSize: 14,
-        },
-        nameRotate: 360,
-      },
-      {
-        gridIndex: 3,
-        axisLabel: {
-          show: false,
-        },
-        axisTick: {
-          show: false,
-        },
-        axisLine: {
-          show: false,
-        },
-        splitLine: {
-          show: false,
-        },
-        splitNumber: 1,
-        name: "无",
-        nameLocation: "center",
-        nameTextStyle: {
-          color: "#97b8d8",
-          fontSize: 14,
-        },
-        nameRotate: 360,
-      },
-    ],
-    grid: [
-      {
-        top: "10%",
-        left: "5%",
-        right: "4%",
-        bottom: "4%",
-        height: "20%",
-      },
-      {
-        top: "30%",
-        left: "5%",
-        right: "4%",
-        bottom: "4%",
-        height: "20%",
-      },
-      {
-        top: "50%",
-        left: "5%",
-        right: "4%",
-        bottom: "4%",
-        height: "20%",
-      },
-      {
-        top: "70%",
-        left: "5%",
-        right: "4%",
-        bottom: "4%",
-        height: "20%",
-      },
-    ],
     series: [
       {
-        type: "line",
         data: [
-          0, 41.1, 30.4, 65.1, 53.3, 53.3, 53.3, 41.1, 30.4, 65.1, 53.3, 0,
+          820, 932, 901, 934, 1290, 1330, 1320, 820, 932, 901, 934, 1290, 1330,
+          1320,
         ],
-        xAxisIndex: 0,
-        yAxisIndex: 0,
-        smooth: true,
-        lineStyle: {
-          color: "#92c690",
-        },
-        itemStyle: {
-          normal: {
-            color: "#92c690",
-            borderColor: "#92c690",
-          },
-        },
-        areaStyle: {
-          color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-            {
-              offset: 0,
-              color: "#92c690b3",
-            },
-            {
-              offset: 1,
-              color: "#92c69003",
-            },
-          ]),
-        },
-      },
-      {
         type: "line",
-        data: [12, 45, 15, 2, 56, 15, 12, 45, 15, 2, 56, 15],
-        xAxisIndex: 1,
-        yAxisIndex: 1,
         smooth: true,
         lineStyle: {
           color: "#219cab",
@@ -1936,36 +1627,6 @@ const handleMatchTrendCharts = () => {
             {
               offset: 1,
               color: "#219cab03",
-            },
-          ]),
-        },
-      },
-      {
-        type: "line",
-        data: [
-          0, 74.1, 67.2, 79.5, 46.4, 46.4, 46.4, 74.1, 67.2, 79.5, 46.4, 0,
-        ],
-        xAxisIndex: 2,
-        yAxisIndex: 2,
-        smooth: true,
-        lineStyle: {
-          color: "#6f68bf",
-        },
-        itemStyle: {
-          normal: {
-            color: "#6f68bf",
-            borderColor: "#6f68bf",
-          },
-        },
-        areaStyle: {
-          color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-            {
-              offset: 0,
-              color: "#6f68bfb3",
-            },
-            {
-              offset: 1,
-              color: "#6f68bf03",
             },
           ]),
         },
@@ -2003,27 +1664,27 @@ const countConfig = [
     value: 1000,
   },
   {
-    label: "会员总数",
+    label: "日活跃",
     value: 1000,
   },
   {
-    label: "会员总数",
+    label: "日流失",
     value: 1000,
   },
   {
-    label: "会员总数",
+    label: "日新增",
     value: 1000,
   },
   {
-    label: "会员总数",
+    label: "SVIP",
     value: 1000,
   },
   {
-    label: "会员总数",
+    label: "VIP",
     value: 1000,
   },
   {
-    label: "会员总数",
+    label: "普通",
     value: 1000,
   },
 ];
@@ -2099,7 +1760,7 @@ onMounted(() => {
                 <span class="grow-number">3212</span>
                 <span class="grow-text">人</span>
               </div>
-              <div class="grow-label">本月新增</div>
+              <div class="grow-label">今年新增</div>
             </div>
           </div>
           <div id="vip2" class="vip2"></div>
