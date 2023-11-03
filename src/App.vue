@@ -821,12 +821,12 @@ const handleMapECharts = () => {
       animationEasing: "cubicInOut",
       animationDurationUpdate: 1000,
       animationEasingUpdate: "cubicInOut",
-      grid: {
-        right: "1%",
-        top: "15%",
-        bottom: "10%",
-        width: "20%",
-      },
+      // grid: {
+      //   right: "1%",
+      //   top: "15%",
+      //   bottom: "10%",
+      //   width: "20%",
+      // },
       tooltip: {
         padding: 0,
         enterable: true,
@@ -992,8 +992,8 @@ const handleMapECharts = () => {
         show: true,
         map: "china",
         roam: false,
-        zoom: 1,
-        center: [113.83531246, 34.0267395887],
+        zoom: 1.2,
+        // center: [113.83531246, 34.0267395887],
         label: {
           normal: {
             show: false,
