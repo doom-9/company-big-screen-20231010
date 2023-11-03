@@ -1227,7 +1227,7 @@ const handleVip1ECharts = () => {
       {
         name: "实体办税工作量",
         type: "pie",
-        radius: ["30%", "50%"],
+        radius: ["30%", "60%"],
         hoverAnimation: false,
         color: [
           "#c487ee",
@@ -1261,15 +1261,15 @@ const handleVip1ECharts = () => {
             rich: rich,
           },
         },
-        labelLine: {
-          normal: {
-            length: 55 * scale,
-            length2: 0,
-            lineStyle: {
-              color: "#999999",
-            },
-          },
-        },
+        // labelLine: {
+        //   normal: {
+        //     length: 55 * scale,
+        //     length2: 0,
+        //     lineStyle: {
+        //       color: "#999999",
+        //     },
+        //   },
+        // },
         data: echartData,
       },
     ],
@@ -1489,8 +1489,10 @@ const handleMatchStoreCharts = () => {
       {
         name: "漏斗图",
         type: "funnel",
-        left: "10%",
         sort: "ascending",
+        left: "20%",
+        width: "60%",
+        height: "70%",
         gap: 5, // 三角形之间的间距
         label: {
           show: true,
@@ -1568,6 +1570,50 @@ const handleMatchStoreCharts = () => {
 };
 
 const handleMatchAgeCharts = () => {
+  let scale = 1;
+
+  let echartData = [
+    { value: 10, name: "U12" },
+    { value: 5, name: "U13" },
+    { value: 15, name: "U14" },
+    { value: 25, name: "U15" },
+    { value: 20, name: "U16" },
+    { value: 35, name: "U17" },
+    { value: 30, name: "U18" },
+    { value: 40, name: "U19" },
+  ];
+
+  let rich = {
+    yellow: {
+      color: "#ffc72b",
+      fontSize: 12 * scale,
+      padding: [5, 4],
+      align: "center",
+    },
+    total: {
+      color: "#ffc72b",
+      fontSize: 40 * scale,
+      align: "center",
+    },
+    white: {
+      color: "#fff",
+      align: "center",
+      fontSize: 14 * scale,
+      padding: [2, 0],
+    },
+    blue: {
+      color: "#49dff0",
+      fontSize: 16 * scale,
+      align: "center",
+    },
+    hr: {
+      borderColor: "#999999",
+      width: "100%",
+      borderWidth: 1,
+      height: 0,
+    },
+  };
+
   let option = {
     title: {
       // text: "南丁格尔玫瑰图",
@@ -1607,16 +1653,31 @@ const handleMatchAgeCharts = () => {
         type: "pie",
         radius: [40, 150],
         roseType: "area",
-        data: [
-          { value: 10, name: "U12" },
-          { value: 5, name: "U13" },
-          { value: 15, name: "U14" },
-          { value: 25, name: "U15" },
-          { value: 20, name: "U16" },
-          { value: 35, name: "U17" },
-          { value: 30, name: "U18" },
-          { value: 40, name: "U19" },
-        ],
+        label: {
+          normal: {
+            formatter: function (params, ticket, callback) {
+              let total = 0; //考生总数量
+              let percent = "0"; //考生占比
+              echartData.forEach(function (value, index, array) {
+                total += value.value;
+              });
+              percent = ((params.value / total) * 100).toFixed(1);
+              return (
+                "{white|" +
+                params.name +
+                "}\n{hr|}\n{yellow|" +
+                (params.value / 10000).toFixed(1) +
+                "万" +
+                "}"
+                // \n{blue|" +
+                // percent +
+                // "%}"
+              );
+            },
+            rich: rich,
+          },
+        },
+        data: echartData,
       },
     ],
   };
