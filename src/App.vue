@@ -52,7 +52,7 @@ const handlePlayerECharts = () => {
           show: false,
         },
         axisLine: {
-          show: true,
+          show: false,
           lineStyle: {
             color: "#11417a",
           },
@@ -77,11 +77,11 @@ const handlePlayerECharts = () => {
             color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
               {
                 offset: 0,
-                color: "#07ecd9",
+                color: "#43C1EA",
               },
               {
                 offset: 1,
-                color: "#034881",
+                color: "#123C6B",
               },
             ]),
           },
@@ -89,13 +89,13 @@ const handlePlayerECharts = () => {
         data: [20, 80, 100, 40, 34, 90, 60, 60],
         z: 10,
         zlevel: 0,
-        label: {
-          show: true,
-          position: "top",
-          distance: 10,
-          fontSize: 16,
-          color: "#01fff4",
-        },
+        // label: {
+        //   show: true,
+        //   position: "top",
+        //   distance: 10,
+        //   fontSize: 16,
+        //   color: "#01fff4",
+        // },
       },
       {
         // 分隔
@@ -138,7 +138,7 @@ const handleTrialECharts = () => {
       left: "2%",
       right: "2%",
       bottom: "2%",
-      top: "2%",
+      top: "15%",
       containLabel: true,
     },
     tooltip: {
@@ -151,8 +151,18 @@ const handleTrialECharts = () => {
       },
     },
     xAxis: {
-      show: false,
+      // show: false,
       type: "value",
+      splitLine: {
+        show: true,
+        lineStyle: {
+          color: "#113763",
+          width: 1,
+        },
+      },
+      axisLabel: {
+        show: false,
+      },
     },
     yAxis: [
       {
@@ -182,6 +192,7 @@ const handleTrialECharts = () => {
         axisLine: "none",
         show: true,
         axisLabel: {
+          show: false,
           textStyle: {
             color: "#ffffff",
             fontSize: "12",
@@ -197,35 +208,34 @@ const handleTrialECharts = () => {
         zlevel: 1,
         itemStyle: {
           normal: {
-            barBorderRadius: 30,
             color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [
               {
                 offset: 0,
-                color: "rgb(57,89,255,1)",
+                color: "#123C6B",
               },
               {
                 offset: 1,
-                color: "rgb(46,200,207,1)",
+                color: "#43C1EA",
               },
             ]),
           },
         },
-        barWidth: 20,
+        barWidth: 12,
         data: salvProValue,
       },
-      {
-        name: "背景",
-        type: "bar",
-        barWidth: 20,
-        barGap: "-100%",
-        data: salvProMax,
-        itemStyle: {
-          normal: {
-            color: "rgba(24,31,68,1)",
-            barBorderRadius: 30,
-          },
-        },
-      },
+      // {
+      //   name: "背景",
+      //   type: "bar",
+      //   barWidth: 20,
+      //   barGap: "-100%",
+      //   data: salvProMax,
+      //   itemStyle: {
+      //     normal: {
+      //       color: "rgba(24,31,68,1)",
+      //       barBorderRadius: 30,
+      //     },
+      //   },
+      // },
     ],
   };
 
@@ -284,9 +294,8 @@ const handleCoachECharts = () => {
         splitLine: {
           show: true,
           lineStyle: {
-            color: "rgba(255, 129, 109, 0.1)",
-            width: 0.5,
-            type: "dashed",
+            color: "#113763",
+            width: 1,
           },
         },
       },
@@ -297,7 +306,7 @@ const handleCoachECharts = () => {
         barCategoryGap: "0%",
         symbol: "path://M0,10 L10,10 C5.5,10 5.5,5 5,0 C4.5,5 4.5,10 0,10 z",
         label: {
-          show: true,
+          show: false,
           position: "top",
           distance: 15,
           color: "#08DFFE",
@@ -315,11 +324,11 @@ const handleCoachECharts = () => {
               colorStops: [
                 {
                   offset: 0,
-                  color: "#9A11FF",
+                  color: "#43C1EA",
                 },
                 {
                   offset: 1,
-                  color: "#08DFFE",
+                  color: "#123C6B",
                 },
               ],
               global: false, //  缺省为  false
@@ -329,7 +338,7 @@ const handleCoachECharts = () => {
             opacity: 1,
           },
         },
-        data: [123, 60, 25, 18, 12, 9, 2, 1],
+        data: [123, 60, 25, 18, 12],
       },
     ],
   };
