@@ -821,12 +821,6 @@ const handleMapECharts = () => {
       animationEasing: "cubicInOut",
       animationDurationUpdate: 1000,
       animationEasingUpdate: "cubicInOut",
-      // grid: {
-      //   right: "1%",
-      //   top: "15%",
-      //   bottom: "10%",
-      //   width: "20%",
-      // },
       tooltip: {
         padding: 0,
         enterable: true,
@@ -1471,6 +1465,38 @@ const handleVip2ECharts = () => {
 };
 
 const handleMatchStoreCharts = () => {
+  let scale = 1;
+  let rich = {
+    yellow: {
+      color: "#ffc72b",
+      fontSize: 16 * scale,
+      padding: [2, 0],
+      align: "center",
+    },
+    total: {
+      color: "#ffc72b",
+      fontSize: 40 * scale,
+      align: "center",
+    },
+    white: {
+      color: "#fff",
+      align: "center",
+      fontSize: 16 * scale,
+      padding: [2, 0, 0, 10],
+    },
+    blue: {
+      color: "#49dff0",
+      fontSize: 16 * scale,
+      align: "center",
+    },
+    hr: {
+      borderColor: "#999999",
+      width: "100%",
+      borderWidth: 1,
+      height: 0,
+    },
+  };
+
   let option = {
     title: {
       // text: "漏斗图",
@@ -1499,74 +1525,46 @@ const handleMatchStoreCharts = () => {
         name: "漏斗图",
         type: "funnel",
         sort: "ascending",
+        top: "5%",
         left: "20%",
-        width: "60%",
-        height: "70%",
+        width: "40%",
+        height: "90%",
         gap: 5, // 三角形之间的间距
         label: {
           show: true,
-          position: "inside",
+
+          normal: {
+            formatter: function (params, ticket, callback) {
+              return "{yellow|" + params.value + "}{white|" + params.name + "}";
+            },
+            rich: rich,
+            position: "left",
+          },
         },
-        // label: {
-        //   normal: {
-        //     position: "inside",
-        //     padding: [0, 0, 0, 0],
-        //     formatter: function (params) {
-        //       var text = "";
-        //       switch (params.name) {
-        //         case "个人完税证明开具":
-        //           text = "{a|779}{b|笔}\n{c|个人完税证明开具}";
-        //           break;
-        //         case "自然人登记":
-        //           text = "{a|32652}{b|笔}\n{c|自然人登记}";
-        //           break;
-        //         case "申报总量":
-        //           text = "{a|217966}{b|笔}\n{c|申报总量}";
-        //           break;
-        //       }
-        //       return text;
-        //     },
-        //     rich: {
-        //       a: {
-        //         color: "#fdde2c",
-        //         fontSize: "14",
-        //         align: "center",
-        //         border: 0,
-        //       },
-        //       b: {
-        //         fontSize: "14",
-        //         color: "#fff",
-        //         border: 0,
-        //       },
-        //       c: {
-        //         color: "#fff",
-        //         fontSize: "14",
-        //         align: "center",
-        //         border: 0,
-        //       },
-        //     },
-        //   },
-        // },
+        labelLine: {
+          show: true,
+          length: 60,
+        },
         data: [
           {
             value: 30,
             name: "A库",
             itemStyle: {
-              color: "#4BC4A2",
+              color: "#F5B436",
             },
           },
           {
             value: 60,
             name: "B库",
             itemStyle: {
-              color: "#4E6EDF",
+              color: "#2ADCA3",
             },
           },
           {
             value: 90,
             name: "C库",
             itemStyle: {
-              color: "#3E4C9E",
+              color: "#43C1EA",
             },
           },
         ],
@@ -1672,11 +1670,11 @@ const handleMatchAgeCharts = () => {
               });
               percent = ((params.value / total) * 100).toFixed(1);
               return (
-                "{white|" +
-                params.name +
-                "}\n{hr|}\n{yellow|" +
+                "{yellow|" +
                 (params.value / 10000).toFixed(1) +
                 "万" +
+                "}{white|" +
+                params.name +
                 "}"
                 // \n{blue|" +
                 // percent +
@@ -1716,6 +1714,13 @@ const handleMatchTrendCharts = () => {
     },
     yAxis: {
       type: "value",
+      splitLine: {
+        show: true,
+        lineStyle: {
+          color: "#113763",
+          width: 1,
+        },
+      },
     },
     series: [
       {
@@ -1738,11 +1743,11 @@ const handleMatchTrendCharts = () => {
           color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
             {
               offset: 0,
-              color: "#219cabb3",
+              color: "#43C1EA",
             },
             {
               offset: 1,
-              color: "#219cab03",
+              color: "rgba(67,193,234,0)",
             },
           ]),
         },
