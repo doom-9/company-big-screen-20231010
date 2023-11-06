@@ -1,12 +1,68 @@
 <script setup lang="ts">
-import { onMounted, ref } from "vue";
+import { nextTick, onMounted, ref } from "vue";
 import * as echarts from "echarts";
 import { mapJson, imgBase64 } from "./assets/map";
+import data from "../public/data.json";
+import 'ant-design-vue/dist/antd.css'
+import {  message } from 'ant-design-vue'
 
+const showModal = ref(false);
+const showCloseIcon = ref(false);
+const src = ref();
+const closeK8Page = () => {
+  showModal.value = false;
+  showCloseIcon.value = false;
+};
+const pswVisible=ref(false)
+const password=ref('')
+const handleCancel=()=>{
+  pswVisible.value=false
+}
+const handleOk=()=>{
+  if(password.value==='xieyumeng'){
+    localStorage.setItem('showPanel','1')
+    pswVisible.value=false
+    nextTick(()=>{
+      init()
+    })
+  }
+  else {
+    pswVisible.value=true
+    message.warning('密码错误')
+  }
+}
+const getPageK8Page = () => {
+  const k8Page = document.getElementById("modal");
+  // 使用 AJAX 请求获取页面内容
+  var xhr = new XMLHttpRequest();
+  xhr.open("GET", src.value, true);
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState == 4 && xhr.status == 200) {
+      k8Page.innerHTML = xhr.responseText;
+    }
+  };
+  xhr.send();
+  showModal.value = true;
+  setTimeout(() => {
+    showCloseIcon.value = true;
+  }, 1000);
+};
+const setUrl = (url) => {
+  console.log("URL", url);
+
+  src.value = url;
+  getPageK8Page();
+};
+onMounted(() => {
+  window.setUrl = setUrl;
+  pswVisible.value=true
+});
 const handlePlayerECharts = () => {
   let playerXLabel = ["U12", "U13", "U14", "U15", "U16", "U17", "U18", "U19"];
   let playerOption = {
-    tooltip: {},
+    tooltip: {
+      show: false,
+    },
     backgroundColor: "transparent",
     animation: false,
     grid: {
@@ -38,8 +94,8 @@ const handlePlayerECharts = () => {
         type: "value",
         gridIndex: 0,
         min: 0,
-        max: 100,
-        interval: 25,
+        max: 37000,
+        interval: 5000,
         // splitNumber: 4,
         splitLine: {
           show: true,
@@ -60,7 +116,8 @@ const handlePlayerECharts = () => {
         axisLabel: {
           show: true,
           margin: 14,
-          fontSize: 14,
+          fontSize: 11,
+          hideOverlap: false,
           textStyle: {
             color: "#A3C0DF", //X轴文字颜色
           },
@@ -86,8 +143,8 @@ const handlePlayerECharts = () => {
             ]),
           },
         },
-        data: [20, 80, 100, 40, 34, 90, 60, 60],
-        z: 10,
+        data: [11302, 12042, 14581, 12101, 12861, 22592, 12849, 36598],
+        z: 20,
         zlevel: 0,
         // label: {
         //   show: true,
@@ -113,7 +170,7 @@ const handlePlayerECharts = () => {
         symbolPosition: "start",
         symbolOffset: [0, -1],
         // symbolBoundingData: this.total,
-        data: [20, 80, 100, 40, 34, 90, 60, 60],
+        data: [11302, 12042, 14581, 12101, 12861, 22592, 12849, 36598],
         width: 25,
         z: 0,
         zlevel: 1,
@@ -123,8 +180,15 @@ const handlePlayerECharts = () => {
 
   const playerECharts = echarts.init(document.getElementById("player"));
   playerECharts.setOption(playerOption);
+  playerECharts.on("click", function (params: type) {
+    const url = `https://demo.cbastats.com/#/players/index?age=${params.name.slice(
+      1,
+      3
+    )}&sex=1`;
+    src.value = url;
+    getPageK8Page();
+  });
 };
-
 const handleTrialECharts = () => {
   let salvProName = ["国际级", "国家级", "一级", "二级"];
   let salvProValue = [239, 181, 154, 144];
@@ -247,7 +311,7 @@ const handleCoachECharts = () => {
   let option = {
     backgroundColor: "transparent",
     grid: {
-      left: "12%",
+      left: "0%",
       top: "5%",
       bottom: "12%",
       right: "8%",
@@ -272,6 +336,7 @@ const handleCoachECharts = () => {
     },
     yAxis: [
       {
+        show: false,
         axisTick: {
           show: false,
         },
@@ -338,7 +403,8 @@ const handleCoachECharts = () => {
             opacity: 1,
           },
         },
-        data: [123, 60, 25, 18, 12],
+        data: [12, 18, 25, 60, 123],
+        // data: [123, 60, 25, 18, 12],
       },
     ],
   };
@@ -736,40 +802,13 @@ const handleMapECharts = () => {
     }
     return res;
   };
-
-  let toolTipData = [
-    { name: "北京", value: 199 },
-    { name: "天津", value: 42 },
-    { name: "河北", value: 102 },
-    { name: "山西", value: 81 },
-    { name: "内蒙古", value: 47 },
-    { name: "辽宁", value: 67 },
-    { name: "吉林", value: 82 },
-    { name: "黑龙江", value: 123 },
-    { name: "上海", value: 24 },
-    { name: "江苏", value: 92 },
-    { name: "浙江", value: 114 },
-    { name: "安徽", value: 109 },
-    { name: "福建", value: 116 },
-    { name: "江西", value: 91 },
-    { name: "山东", value: 119 },
-    { name: "河南", value: 137 },
-    { name: "湖北", value: 116 },
-    { name: "湖南", value: 114 },
-    { name: "重庆", value: 91 },
-    { name: "四川", value: 125 },
-    { name: "贵州", value: 62 },
-    { name: "云南", value: 83 },
-    { name: "西藏", value: 9 },
-    { name: "陕西", value: 80 },
-    { name: "甘肃", value: 56 },
-    { name: "青海", value: 10 },
-    { name: "宁夏", value: 18 },
-    { name: "新疆", value: 180 },
-    { name: "广东", value: 123 },
-    { name: "广西", value: 59 },
-    { name: "海南", value: 14 },
-  ];
+let toolTipData=[]
+  data.forEach((item:any)=>{
+    toolTipData.push({
+      name:item.province,
+        value:(item.match_count/ 600)
+    })
+  })
 
   let optionXyMap01 = {
     // timeline: {
@@ -835,8 +874,31 @@ const handleMapECharts = () => {
         //   return [point[0], point[1]];
         // },
         formatter: function (params) {
+          console.log("params", params.name);
+          const provinceData = data.filter(
+            (item: any) => item.province === params.name
+          );
+          let matchInfos = "";
           var tipHtml = "";
-          tipHtml = `<div
+          if (provinceData.length > 0) {
+            provinceData[0].recent_match.forEach((matchInfo) => {
+              matchInfos += `<div
+        style="
+          font-size: 14px;
+          font-family: PingFang SC;
+          font-weight: 400;
+          color: #43c1ea;
+          opacity: 0.95;
+        "
+      >
+      <span onClick='setUrl(${JSON.stringify(matchInfo.url)})' class="matchName">
+        ${matchInfo.match_name}
+        </span>
+        
+      </div>`;
+            });
+
+            tipHtml = `<div
     style="width: 258px;height: 318px;overflow: hidden;background-image: url(${imgBase64});background-size: cover;padding:0 27px;box-sizing: border-box;"
   >
     <div
@@ -850,7 +912,7 @@ const handleMapECharts = () => {
         margin-top: 28px;
       "
     >
-      山东省比赛数据
+      ${provinceData[0].province ?? ""}省比赛数据
     </div>
     <div
       style="display: flex; justify-content: space-between; margin-top: 35px"
@@ -864,7 +926,7 @@ const handleMapECharts = () => {
             color: #f5b436;
           "
         >
-          42091
+        ${provinceData[0].player_count ?? ""}
         </div>
         <div
           style="
@@ -888,7 +950,7 @@ const handleMapECharts = () => {
             color: #f5b436;
           "
         >
-          42091
+        ${provinceData[0].coach_count ?? ""}
         </div>
         <div
           style="
@@ -900,7 +962,7 @@ const handleMapECharts = () => {
             margin-top: 12px;
           "
         >
-          球员
+          裁判员
         </div>
       </div>
       <div style="display: flex; flex-direction: column; align-items: center">
@@ -912,7 +974,7 @@ const handleMapECharts = () => {
             color: #f5b436;
           "
         >
-          42091
+        ${provinceData[0].referee_count ?? ""}
         </div>
         <div
           style="
@@ -924,12 +986,12 @@ const handleMapECharts = () => {
             margin-top: 12px;
           "
         >
-          球员
+          教练员
         </div>
       </div>
     </div>
     <div
-      style="margin-top: 31px; display: flex; align-items: center; gap: 20px"
+      style="margin-top: 31px; display: flex; align-items: center; gap: 12px"
     >
       <span
         style="
@@ -939,7 +1001,7 @@ const handleMapECharts = () => {
           color: #ffffff;
           opacity: 0.95;
         "
-        >正进行的比赛
+        >最近的比赛
       </span>
       <span
         style="
@@ -949,36 +1011,20 @@ const handleMapECharts = () => {
           color: #f5b436;
           opacity: 0.95;
         "
-        >531场
+        >
+        ${provinceData[0].match_count ?? ""}
+        场
       </span>
     </div>
     <div
-      style="margin-top: 31px; display: flex; flex-direction: column; gap: 20px"
+      style="margin-top: 31px; display: flex; flex-direction: column; gap: 12px"
     >
-      <div
-        style="
-          font-size: 14px;
-          font-family: PingFang SC;
-          font-weight: 400;
-          color: #43c1ea;
-          opacity: 0.95;
-        "
-      >
-        U13山东雏鹰杯
-      </div>
-      <div
-        style="
-          font-size: 14px;
-          font-family: PingFang SC;
-          font-weight: 400;
-          color: #43c1ea;
-          opacity: 0.95;
-        "
-      >
-        U13山东雏鹰杯
-      </div>
+    ${matchInfos}
     </div>
   </div>`;
+          }
+
+
           return tipHtml;
         },
       },
@@ -1136,27 +1182,27 @@ const handleVip1ECharts = () => {
   let scale = 1;
   let echartData = [
     {
-      value: 2154,
+      value: 7000,
       name: "球员",
     },
     {
-      value: 3854,
+      value: 4000,
       name: "裁判员",
     },
     {
-      value: 3515,
+      value: 5000,
       name: "教练员",
     },
     {
-      value: 3515,
+      value: 6000,
       name: "媒体",
     },
     {
-      value: 3854,
+      value: 9000,
       name: "培训机构",
     },
     {
-      value: 2154,
+      value: 21000,
       name: "球迷",
     },
   ];
@@ -1283,6 +1329,18 @@ const handleVip1ECharts = () => {
 };
 
 const handleVip2ECharts = () => {
+  var now = new Date();
+  var date1 = new Date(now.getTime() - 1 * 24 * 3600 * 1000);
+  console.log("data1", date1.getDate());
+
+  var date2 = new Date(now.getTime() - 2 * 24 * 3600 * 1000);
+  var date3 = new Date(now.getTime() - 3 * 24 * 3600 * 1000);
+  var date4 = new Date(now.getTime() - 4 * 24 * 3600 * 1000);
+  var date5 = new Date(now.getTime() - 5 * 24 * 3600 * 1000);
+  var date6 = new Date(now.getTime() - 6 * 24 * 3600 * 1000);
+  var date7 = new Date(now.getTime() - 7 * 24 * 3600 * 1000);
+  console.log("date", date1);
+
   let option = {
     backgroundColor: "transparent",
     grid: {
@@ -1328,7 +1386,15 @@ const handleVip2ECharts = () => {
         splitLine: {
           show: false,
         },
-        data: ["10.1", "10.2", "10.3", "10.4", "10.5"],
+        data: [
+          `${date7.getMonth() + 1}.${date7.getDate()}`,
+          `${date6.getMonth() + 1}.${date6.getDate()}`,
+          `${date5.getMonth() + 1}.${date5.getDate()}`,
+          `${date4.getMonth() + 1}.${date4.getDate()}`,
+          `${date3.getMonth() + 1}.${date3.getDate()}`,
+          `${date2.getMonth() + 1}.${date2.getDate()}`,
+          `${date1.getMonth() + 1}.${date1.getDate()}`,
+        ],
       },
     ],
     yAxis: [
@@ -1503,6 +1569,7 @@ const handleMatchStoreCharts = () => {
       // subtext: "纯属虚构",
     },
     tooltip: {
+      show: false,
       trigger: "item",
       formatter: "{a} <br/>{b} : {c}%",
     },
@@ -1522,11 +1589,11 @@ const handleMatchStoreCharts = () => {
     calculable: true,
     series: [
       {
-        name: "漏斗图",
+        name: "比赛库",
         type: "funnel",
         sort: "ascending",
         top: "5%",
-        left: "20%",
+        left: "30%",
         width: "40%",
         height: "90%",
         gap: 5, // 三角形之间的间距
@@ -1535,7 +1602,14 @@ const handleMatchStoreCharts = () => {
 
           normal: {
             formatter: function (params, ticket, callback) {
-              return "{yellow|" + params.value + "}{white|" + params.name + "}";
+              return (
+                "{yellow|" +
+                (params.value / 10000).toFixed(1) +
+                "万" +
+                "}{white|" +
+                params.name +
+                "}"
+              );
             },
             rich: rich,
             position: "left",
@@ -1547,22 +1621,22 @@ const handleMatchStoreCharts = () => {
         },
         data: [
           {
-            value: 30,
-            name: "A库",
+            value: 27291,
+            name: "A级",
             itemStyle: {
               color: "#F5B436",
             },
           },
           {
-            value: 60,
-            name: "B库",
+            value: 52315,
+            name: "B级",
             itemStyle: {
               color: "#2ADCA3",
             },
           },
           {
-            value: 90,
-            name: "C库",
+            value: 73971,
+            name: "C级",
             itemStyle: {
               color: "#43C1EA",
             },
@@ -1574,20 +1648,25 @@ const handleMatchStoreCharts = () => {
 
   const razCharts = echarts.init(document.getElementById("razing"));
   razCharts.setOption(option);
+  razCharts.on("click", function (params: type) {
+    const url = "https://demo.cbastats.com/#/league/index";
+    src.value = url;
+    getPageK8Page();
+  });
 };
 
 const handleMatchAgeCharts = () => {
   let scale = 1;
 
   let echartData = [
-    { value: 10, name: "U12" },
-    { value: 5, name: "U13" },
-    { value: 15, name: "U14" },
-    { value: 25, name: "U15" },
-    { value: 20, name: "U16" },
-    { value: 35, name: "U17" },
-    { value: 30, name: "U18" },
-    { value: 40, name: "U19" },
+    { value: 3424, name: "U12" },
+    { value: 4332, name: "U13" },
+    { value: 6667, name: "U14" },
+    { value: 7667, name: "U15" },
+    { value: 9563, name: "U16" },
+    { value: 11095, name: "U17" },
+    { value: 11467, name: "U18" },
+    { value: 20778, name: "U19" },
   ];
 
   let rich = {
@@ -1670,12 +1749,7 @@ const handleMatchAgeCharts = () => {
               });
               percent = ((params.value / total) * 100).toFixed(1);
               return (
-                "{yellow|" +
-                (params.value / 10000).toFixed(1) +
-                "万" +
-                "}{white|" +
-                params.name +
-                "}"
+                "{yellow|" + params.value + "}{white|" + params.name + "}"
                 // \n{blue|" +
                 // percent +
                 // "%}"
@@ -1695,6 +1769,14 @@ const handleMatchAgeCharts = () => {
 
 const handleMatchTrendCharts = () => {
   let option = {
+    grid: {
+      // show: true,
+      // left: "5%",
+      // right: "5%",
+      // top: "20%",
+      bottom: "7%",
+      containLabel: true,
+    },
     xAxis: {
       type: "category",
       data: [
@@ -1771,8 +1853,10 @@ const handleTime = () => {
   const weekMap = ["日", "一", "二", "三", "四", "五", "六"];
 
   const hour = date.getHours();
-  const minute = date.getMinutes();
-  const second = date.getSeconds();
+  const minute =
+    Number(date.getMinutes()) > 9 ? date.getMinutes() : `0${date.getMinutes()}`;
+  const second =
+    Number(date.getSeconds()) > 9 ? date.getSeconds() : `0${date.getSeconds()}`;
 
   if (time) {
     time.innerHTML = `${year}-${month}-${day} 星期${weekMap[week]} ${hour}:${minute}:${second}`;
@@ -1782,35 +1866,34 @@ const handleTime = () => {
 const countConfig = [
   {
     label: "会员总数",
-    value: 1000,
-  },
-  {
-    label: "日活跃",
-    value: 1000,
-  },
-  {
-    label: "日流失",
-    value: 1000,
-  },
-  {
-    label: "日新增",
-    value: 1000,
+    value: 52232,
   },
   {
     label: "SVIP",
-    value: 1000,
+    value: 2885,
   },
   {
     label: "VIP",
-    value: 1000,
+    value: 15257,
   },
   {
     label: "普通",
-    value: 1000,
+    value: 34089,
+  },
+  {
+    label: "日活跃",
+    value: 4221,
+  },
+  {
+    label: "日新增",
+    value: 176,
+  },
+  {
+    label: "日流失",
+    value: 56,
   },
 ];
-
-onMounted(() => {
+const init=()=>{
   handlePlayerECharts();
   handleTrialECharts();
   handleCoachECharts();
@@ -1825,11 +1908,19 @@ onMounted(() => {
   setInterval(() => {
     handleTime();
   }, 1000);
+}
+onMounted(() => {
+  const showPanel=localStorage.getItem('showPanel')
+  if(showPanel==='1'){
+    init()
+    pswVisible.value=false
+  }
 });
+
 </script>
 
 <template>
-  <div class="page">
+  <div class="page" v-if="!pswVisible">
     <div class="header">
       <div class="title">中国篮球协会人才体系可视化平台</div>
       <div class="time"></div>
@@ -1839,17 +1930,17 @@ onMounted(() => {
       <div class="left">
         <div class="title-box">
           <span class="first">球员</span>
-          <span class="second">/Player Library</span>
+          <span class="second">/Players</span>
         </div>
         <div id="player" class="player"></div>
         <div class="title-box">
           <span class="first">裁判员</span>
-          <span class="second">/Referee Library</span>
+          <span class="second">/Referees</span>
         </div>
         <div id="trial" class="trial"></div>
         <div class="title-box">
           <span class="first">教练员</span>
-          <span class="second">/Coach Library</span>
+          <span class="second">/Coachs</span>
         </div>
         <div id="coach" class="coach"></div>
       </div>
@@ -1871,14 +1962,14 @@ onMounted(() => {
           <div class="grow-count">
             <div class="grow-item-box">
               <div class="grow-item">
-                <span class="grow-number">3212</span>
+                <span class="grow-number">3122</span>
                 <span class="grow-text">人</span>
               </div>
               <div class="grow-label">本月新增</div>
             </div>
             <div class="grow-item-box">
               <div class="grow-item">
-                <span class="grow-number">3212</span>
+                <span class="grow-number">13454</span>
                 <span class="grow-text">人</span>
               </div>
               <div class="grow-label">今年新增</div>
@@ -1891,7 +1982,7 @@ onMounted(() => {
       <div class="right">
         <div class="title-box">
           <span class="first">比赛库</span>
-          <span class="second">/Competition Library</span>
+          <span class="second">/Competitions</span>
         </div>
         <div id="razing" class="razing"></div>
         <div class="title-box">
@@ -1906,10 +1997,154 @@ onMounted(() => {
         <div id="match-trend" class="match-trend"></div>
       </div>
     </div>
+    <div class="footer">*本系统数据为演示数据非真实数据</div>
+    <div id="modal" v-if="showModal">
+      <iframe class="k8page" :src="src"></iframe>
+      <div class="mask"></div>
+      <div class="closeIcon" @click="closeK8Page">
+        <img v-if="showCloseIcon" src="../public/close.svg" />
+      </div>
+    </div>
   </div>
+  <Transition name="fade" mode="out-in">
+    <div v-if="pswVisible" class="mask_box">
+      <div class="mask_center">
+        <div class="header1">
+          <span class="title"> 输入密码 </span>
+          <img src="../public/close.svg" @click="handleCancel">
+        </div>
+        <div class="content">
+          <a-input-password id="pwd" v-model:value="password" class="inputBox" placeholder="请输入密码" />
+        </div>
+        <div class="footer">
+          <a-button class="btn1" @click="handleCancel">
+            取消
+          </a-button>
+          <a-button class="btn2" @click="handleOk">
+            确定
+          </a-button>
+        </div>
+      </div>
+    </div>
+  </Transition>
 </template>
 
 <style scoped>
+.mask_box {
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000002;
+    position: fixed;
+    top: 0px;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    .mask_center {
+      z-index: 10000002;
+        width: 460px;
+        height: 232px;
+        background: #ffffff;
+        border-radius: 4px;
+        padding: 23px 23px 24px 24px;
+        .header1 {
+            width: 100%;
+            display: flex;
+            margin-bottom: 22px;
+            justify-content: space-between;
+            .title {
+                font-size: 18px;
+                font-family: PingFangSC-Medium, PingFang SC;
+                font-weight: 600;
+                color: #000000;
+                line-height: 25px;
+            }
+            img:hover {
+                cursor: pointer;
+            }
+        }
+        .content {
+            :deep(.ant-input-affix-wrapper-focused) {
+                border: 1px solid #0268d6;
+                border-color: #0268d6;
+                box-shadow: none;
+            }
+            .inputBox {
+                margin-top: 16px;
+                height: 46px;
+                width: 100%;
+                background: rgba(0, 0, 0, 0.06);
+                border-radius: 6px;
+                border: 1px solid transparent;
+                padding: 12px 16px;
+            }
+            .inputBox:hover {
+                border: 1px solid #0268d6;
+            }
+            :deep(.ant-input) {
+                background-color: transparent;
+                font-size: 16px;
+                font-family: PingFangSC-Regular, PingFang SC;
+                font-weight: 400;
+                color: #000;
+                line-height: 22px;
+            }
+            :deep(.ant-input-affix-wrapper) {
+                font-size: 18px;
+                color: #aaaaaa;
+            }
+        }
+        .footer {
+            margin-top: 40px;
+            display: flex;
+            gap: 16px;
+            justify-content: right;
+            .btn1,
+            .btn2 {
+                width: 80px;
+                height: 36px;
+                border-radius: 4px;
+                font-size: 14px;
+                font-family: PingFangSC-Medium, PingFang SC;
+                font-weight: 500;
+                line-height: 20px;
+            }
+            .btn1 {
+                border: 1px solid rgba(0, 0, 0, 0.2);
+                color: rgba(0, 0, 0, 0.85);
+            }
+            .btn1:hover {
+                border: 1px solid #0173ef;
+                color: #0173ef;
+            }
+            .btn2 {
+                border: 1px solid #0173ef;
+                background: #0173ef;
+                color: #fff;
+            }
+            .btn2:hover {
+                opacity: 0.8;
+            }
+        }
+    }
+}
+.fade-enter-from,
+.fade-leave-to {
+    opacity: 0;
+}
+
+.fade-enter-to,
+.fade-leave-from {
+    opacity: 1;
+}
+
+.fade-enter-active {
+    transition: opacity 0.4s ease;
+}
+.fade-leave-active {
+    transition: opacity 0.1s ease;
+}
 .page {
   width: 1920px;
   height: 1080px;
@@ -2114,6 +2349,59 @@ onMounted(() => {
         }
       }
     }
+  }
+  .footer {
+    font-size: 12px;
+    font-family: auto;
+    font-weight: 400;
+    color: #a3c0df;
+    opacity: 0.95;
+    margin-left: 24px;
+  }
+  #modal {
+    position: fixed;
+    top: 0;
+    height: 100vh;
+    width: 100vw;
+    left: 0;
+    z-index: 10000000;
+    background: rgba(0, 0, 0, 0.6);
+    .k8page {
+      position: relative;
+      z-index: 10000000;
+      margin-top: 7.5vh;
+      margin-left: 7.5vw;
+      width: 85vw;
+      height: 85vh;
+      border: none !important;
+      -webkit-clip-path: polygon(1% 17%,8% 7%,19% 7%,29% 14%,45% 14%,56% 5%,81% 4%,94% 16%,94% 48%,84% 55%,13% 55%,1% 48%);
+      clip-path: polygon(2.4% 1.2%, 8.8% 1.2%, 9.7% 2.3%, 19% 2.3%, 19.6% 1.2%, 97.5% 1.2%, 99.35% 4.4%, 99.35% 95.4%, 97.5% 98.75%, 2.4% 98.75%,0.65% 95.5%, 0.65% 4.4%);
+    }
+    .mask{
+      z-index: 1;
+      width: 85vw;
+      height: 85vh;
+      background: url(../public/background.png) no-repeat;
+      background-size: 100% 100%;
+      position: absolute;
+      top: 7.5vh;
+      left: 7.5vw;
+    }
+    .closeIcon {
+      position: absolute;
+      z-index: 10000002;
+      right: calc(24px + 7.5vw);
+      top: calc(27px + 7.5vh);
+      color: white;
+      cursor: pointer;
+      img {
+        height: 16px;
+        width: 16px;
+      }
+    }
+  }
+  .matchName :hover{
+    cursor: pointer;
   }
 }
 </style>

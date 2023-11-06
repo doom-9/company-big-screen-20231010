@@ -15,6 +15,7 @@
     "vue": "^3.3.4"
   },
   "devDependencies": {
+    "ant-design-vue": "^3.2.20",
     "@vitejs/plugin-vue": "^4.4.0",
     "ssh2-sftp-client": "^9.1.0",
     "typescript": "^5.2.2",

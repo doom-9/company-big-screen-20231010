@@ -1,0 +1,327 @@
+[
+    {
+        "province": "山东",
+        "player_count": 7831,
+        "coach_count": 562,
+        "referee_count": 513,
+        "match_count": 34337,
+        "recent_match": [
+            {
+                "match_name": "中国男子篮球职业联赛",
+                "url": "https://demo.cbastats.com/#/league/10003/home"
+            },
+            {
+                "match_name": "U15全国青少年联赛",
+                "url": "https://demo.cbastats.com/#/league/20032/home"
+            },
+            {
+                "match_name": "U15睿联赛",
+                "url": "https://demo.cbastats.com/#/league/20027/home"
+            }
+        ]
+    },
+    {
+        "province": "北京",
+        "player_count": 6469,
+        "coach_count": 414,
+        "referee_count": 358,
+        "match_count": 90551,
+        "recent_match": [
+            {
+                "match_name": "中国男子篮球职业联赛",
+                "url": "https://demo.cbastats.com/#/league/10003/home"
+            },
+            {
+                "match_name": "U10睿联赛",
+                "url": "https://demo.cbastats.com/#/league/20043/home"
+            }
+        ]
+    },
+    {
+        "province": "浙江",
+        "player_count": 8348,
+        "coach_count": 213,
+        "referee_count": 852,
+        "match_count": 48730,
+        "recent_match": [
+            {
+                "match_name": "中国男子篮球职业联赛",
+                "url": "https://demo.cbastats.com/#/league/10003/home"
+            },
+            {
+                "match_name": "亚运会三人篮球",
+                "url": "https://demo.cbastats.com/#/league/20088/home"
+            },
+            {
+                "match_name": "中国大学生篮球联赛",
+                "url": "https://demo.cbastats.com/#/league/20004/home"
+            }
+        ]
+    },
+    {
+        "province": "广西",
+        "player_count": 7678,
+        "coach_count": 456,
+        "referee_count": 416,
+        "match_count": 81436,
+        "recent_match": [
+            {
+                "match_name": "全国学生青年运动会",
+                "url": "https://www.cbastats.com/#/league/20085/home"
+            },
+            {
+                "match_name": "少年CBA",
+                "url": "https://demo.cbastats.com/#/league/20055/home"
+            }
+        ]
+    },
+    {
+        "province": "辽宁",
+        "player_count": 8343,
+        "coach_count": 267,
+        "referee_count": 641,
+        "match_count": 77627,
+        "recent_match": [
+            {
+                "match_name": "中国男子篮球职业联赛",
+                "url": "https://demo.cbastats.com/#/league/10003/home"
+            },
+            {
+                "match_name": "辽吉黑蒙邀请赛",
+                "url": "https://www.cbastats.com/#/league/20090/home"
+            },
+            {
+                "match_name": "中国大学生篮球联赛",
+                "url": "https://demo.cbastats.com/#/league/20004/home"
+            }
+        ]
+    },
+    {
+        "province": "湖南",
+        "player_count": 7404,
+        "coach_count": 169,
+        "referee_count": 986,
+        "match_count": 83653,
+        "recent_match": [
+            {
+                "match_name": "湖南省大学生篮球联赛",
+                "url": "https://www.cbastats.com/#/league/20092/home"
+            },
+            {
+                "match_name": "少年CBA",
+                "url": "https://demo.cbastats.com/#/league/20055/home"
+            }
+        ]
+    },
+    {
+        "province": "四川",
+        "player_count": 5364,
+        "coach_count": 271,
+        "referee_count": 545,
+        "match_count": 96392,
+        "recent_match": [
+            {
+                "match_name": "世界大学生运动会",
+                "url": "https://www.cbastats.com/#/league/20064/home"
+            },
+            {
+                "match_name": "少年CBA",
+                "url": "https://demo.cbastats.com/#/league/20055/home"
+            }
+        ]
+    },
+    {
+        "province": "广东",
+        "player_count": 9830,
+        "coach_count": 291,
+        "referee_count": 465,
+        "match_count": 60967,
+        "recent_match": [
+            {
+                "match_name": "中国男子篮球职业联赛",
+                "url": "https://demo.cbastats.com/#/league/10003/home"
+            }
+        ]
+    },
+    {
+        "province": "四川",
+        "player_count": 8475,
+        "coach_count": 301,
+        "referee_count": 722,
+        "match_count": 29758,
+        "recent_match": [
+            {
+                "match_name": "中国男子篮球职业联赛",
+                "url": "https://demo.cbastats.com/#/league/10003/home"
+            },
+            {
+                "match_name": "少年CBA",
+                "url": "https://demo.cbastats.com/#/league/20055/home"
+            }
+        ]
+    },
+    {
+        "province": "江苏",
+        "player_count": 9655,
+        "coach_count": 214,
+        "referee_count": 405,
+        "match_count": 82999,
+        "recent_match": [
+            {
+                "match_name": "中国男子篮球职业联赛",
+                "url": "https://demo.cbastats.com/#/league/10003/home"
+            }
+        ]
+    },
+    {
+        "province": "山西",
+        "player_count": 8280,
+        "coach_count": 337,
+        "referee_count": 337,
+        "match_count": 82945,
+        "recent_match": [
+            {
+                "match_name": "中国男子篮球职业联赛",
+                "url": "https://demo.cbastats.com/#/league/10003/home"
+            },
+            {
+                "match_name": "U12睿联赛",
+                "url": "https://demo.cbastats.com/#/league/20048/home"
+            }
+        ]
+    },
+    {
+        "province": "吉林",
+        "player_count": 5549,
+        "coach_count": 382,
+        "referee_count": 317,
+        "match_count": 12011,
+        "recent_match": [
+            {
+                "match_name": "中国男子篮球职业联赛",
+                "url": "https://demo.cbastats.com/#/league/10003/home"
+            }
+        ]
+    },
+    {
+        "province": "新疆",
+        "player_count": 8960,
+        "coach_count": 482,
+        "referee_count": 704,
+        "match_count": 80051,
+        "recent_match": [
+            {
+                "match_name": "中国男子篮球职业联赛",
+                "url": "https://demo.cbastats.com/#/league/10003/home"
+            },
+            {
+                "match_name": "中国女子篮球职业联赛",
+                "url": "https://demo.cbastats.com/#/league/10002/home"
+            }
+        ]
+    },
+    {
+        "province": "福建",
+        "player_count": 8971,
+        "coach_count": 566,
+        "referee_count": 373,
+        "match_count": 25302,
+        "recent_match": [
+            {
+                "match_name": "中国男子篮球职业联赛",
+                "url": "https://demo.cbastats.com/#/league/10003/home"
+            }
+        ]
+    },
+    {
+        "province": "上海",
+        "player_count": 5550,
+        "coach_count": 311,
+        "referee_count": 641,
+        "match_count": 60933,
+        "recent_match": [
+            {
+                "match_name": "中国男子篮球职业联赛",
+                "url": "https://demo.cbastats.com/#/league/10003/home"
+            }
+        ]
+    },
+    {
+        "province": "云南",
+        "player_count": 7929,
+        "coach_count": 467,
+        "referee_count": 670,
+        "match_count": 12546,
+        "recent_match": [
+            {
+                "match_name": "中国大学生篮球联赛",
+                "url": "https://demo.cbastats.com/#/league/20004/home"
+            }
+        ]
+    },
+    {
+        "province": "河南",
+        "player_count": 7146,
+        "coach_count": 434,
+        "referee_count": 540,
+        "match_count": 31492,
+        "recent_match": [
+            {
+                "match_name": "中国大学生篮球联赛",
+                "url": "https://demo.cbastats.com/#/league/20004/home"
+            }
+        ]
+    },
+    {
+        "province": "安徽",
+        "player_count": 7719,
+        "coach_count": 148,
+        "referee_count": 404,
+        "match_count": 45357,
+        "recent_match": [
+            {
+                "match_name": "少年CBA",
+                "url": "https://demo.cbastats.com/#/league/20055/home"
+            }
+        ]
+    },
+    {
+        "province": "内蒙古",
+        "player_count": 9599,
+        "coach_count": 318,
+        "referee_count": 583,
+        "match_count": 43092,
+        "recent_match": [
+            {
+                "match_name": "中国女子篮球职业联赛",
+                "url": "https://demo.cbastats.com/#/league/10002/home"
+            }
+        ]
+    },
+    {
+        "province": "黑龙江",
+        "player_count": 9756,
+        "coach_count": 583,
+        "referee_count": 935,
+        "match_count": 81110,
+        "recent_match": [
+            {
+                "match_name": "中国女子篮球职业联赛",
+                "url": "https://demo.cbastats.com/#/league/10002/home"
+            }
+        ]
+    },
+    {
+        "province": "陕西",
+        "player_count": 9491,
+        "coach_count": 420,
+        "referee_count": 535,
+        "match_count": 65195,
+        "recent_match": [
+            {
+                "match_name": "中国女子篮球职业联赛",
+                "url": "https://demo.cbastats.com/#/league/10002/home"
+            }
+        ]
+    }
+]

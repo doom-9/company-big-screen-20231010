@@ -357,3 +357,9 @@ template {
   font-family: PingFang SC;
   src: url('./assets/PingFang-SC.ttf');
 }
+@font-face {  
+  font-family: 'PingFangSC-Medium'; 
+  src: url('./assets/PingFang-SC-Medium.ttf');
+  font-weight: normal;  
+  font-style: normal;  
+}
