@@ -892,7 +892,7 @@ const handleMapECharts = () => {
       >
       <span onClick='setUrl(${JSON.stringify(
         matchInfo.url
-      )})' class="matchName">
+      )})' class="matchName" style="cursor:pointer;">
         ${matchInfo.match_name}
         </span>
         
@@ -1916,6 +1916,11 @@ onMounted(() => {
     pswVisible.value = false;
   }
 });
+const openPage=()=>{
+  const url = "https://demo.cbastats.com/#/league/index";
+    src.value = url;
+    getPageK8Page();
+}
 </script>
 
 <template>
@@ -1984,7 +1989,7 @@ onMounted(() => {
           <span class="second">/Competitions</span>
         </div>
 
-        <div id="razing" class="razing">
+        <div id="razing" class="razing" @click="openPage()">
           <!-- <img src="../src/assets/razing.png" style="width: 276px;height: 198px;margin-left: 60px;"> -->
           <div class="boxA">
             <span class="number">2.7万</span><span class="level">A级</span>
@@ -2269,6 +2274,9 @@ onMounted(() => {
           padding-left: 4px;
         }
       }
+      .razing:hover{
+        cursor: pointer;
+      }
 
       .match-age {
         width: 474px;
@@ -2468,7 +2476,7 @@ onMounted(() => {
       }
     }
   }
-  .matchName :hover {
+  .matchName {
     cursor: pointer;
   }
 }
