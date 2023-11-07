@@ -3,8 +3,8 @@ import { nextTick, onMounted, ref } from "vue";
 import * as echarts from "echarts";
 import { mapJson, imgBase64 } from "./assets/map";
 import data from "../public/data.json";
-import 'ant-design-vue/dist/antd.css'
-import {  message } from 'ant-design-vue'
+import "ant-design-vue/dist/antd.css";
+import { message } from "ant-design-vue";
 
 const showModal = ref(false);
 const showCloseIcon = ref(false);
@@ -13,24 +13,23 @@ const closeK8Page = () => {
   showModal.value = false;
   showCloseIcon.value = false;
 };
-const pswVisible=ref(false)
-const password=ref('')
-const handleCancel=()=>{
-  pswVisible.value=false
-}
-const handleOk=()=>{
-  if(password.value==='xieyumeng'){
-    localStorage.setItem('showPanel','1')
-    pswVisible.value=false
-    nextTick(()=>{
-      init()
-    })
+const pswVisible = ref(false);
+const password = ref("");
+const handleCancel = () => {
+  pswVisible.value = false;
+};
+const handleOk = () => {
+  if (password.value === "xieyumeng") {
+    localStorage.setItem("showPanel", "1");
+    pswVisible.value = false;
+    nextTick(() => {
+      init();
+    });
+  } else {
+    pswVisible.value = true;
+    message.warning("密码错误");
   }
-  else {
-    pswVisible.value=true
-    message.warning('密码错误')
-  }
-}
+};
 const getPageK8Page = () => {
   const k8Page = document.getElementById("modal");
   // 使用 AJAX 请求获取页面内容
@@ -55,7 +54,7 @@ const setUrl = (url) => {
 };
 onMounted(() => {
   window.setUrl = setUrl;
-  pswVisible.value=true
+  pswVisible.value = true;
 });
 const handlePlayerECharts = () => {
   let playerXLabel = ["U12", "U13", "U14", "U15", "U16", "U17", "U18", "U19"];
@@ -802,13 +801,13 @@ const handleMapECharts = () => {
     }
     return res;
   };
-let toolTipData=[]
-  data.forEach((item:any)=>{
+  let toolTipData = [];
+  data.forEach((item: any) => {
     toolTipData.push({
-      name:item.province,
-        value:(item.match_count/ 600)
-    })
-  })
+      name: item.province,
+      value: item.match_count / 600,
+    });
+  });
 
   let optionXyMap01 = {
     // timeline: {
@@ -891,7 +890,9 @@ let toolTipData=[]
           opacity: 0.95;
         "
       >
-      <span onClick='setUrl(${JSON.stringify(matchInfo.url)})' class="matchName">
+      <span onClick='setUrl(${JSON.stringify(
+        matchInfo.url
+      )})' class="matchName">
         ${matchInfo.match_name}
         </span>
         
@@ -1017,13 +1018,12 @@ let toolTipData=[]
       </span>
     </div>
     <div
-      style="margin-top: 31px; display: flex; flex-direction: column; gap: 12px"
+      style="margin-top: 31px; display: flex; flex-direction: column; gap: 5px"
     >
     ${matchInfos}
     </div>
   </div>`;
           }
-
 
           return tipHtml;
         },
@@ -1893,14 +1893,14 @@ const countConfig = [
     value: 56,
   },
 ];
-const init=()=>{
+const init = () => {
   handlePlayerECharts();
   handleTrialECharts();
   handleCoachECharts();
   handleMapECharts();
   handleVip1ECharts();
   handleVip2ECharts();
-  handleMatchStoreCharts();
+  // handleMatchStoreCharts();
   handleMatchAgeCharts();
   handleMatchTrendCharts();
 
@@ -1908,15 +1908,14 @@ const init=()=>{
   setInterval(() => {
     handleTime();
   }, 1000);
-}
+};
 onMounted(() => {
-  const showPanel=localStorage.getItem('showPanel')
-  if(showPanel==='1'){
-    init()
-    pswVisible.value=false
+  const showPanel = localStorage.getItem("showPanel");
+  if (showPanel === "1") {
+    init();
+    pswVisible.value = false;
   }
 });
-
 </script>
 
 <template>
@@ -1984,7 +1983,19 @@ onMounted(() => {
           <span class="first">比赛库</span>
           <span class="second">/Competitions</span>
         </div>
-        <div id="razing" class="razing"></div>
+
+        <div id="razing" class="razing">
+          <!-- <img src="../src/assets/razing.png" style="width: 276px;height: 198px;margin-left: 60px;"> -->
+          <div class="boxA">
+            <span class="number">2.7万</span><span class="level">A级</span>
+          </div>
+          <div class="boxB">
+            <span class="number">5.2万</span><span class="level">B级</span>
+          </div>
+          <div class="boxC">
+            <span class="number">7.4万</span><span class="level">C级</span>
+          </div>
+        </div>
         <div class="title-box">
           <span class="first">比赛年龄分布</span>
           <span class="second">/Competition Age Distribution</span>
@@ -2011,18 +2022,19 @@ onMounted(() => {
       <div class="mask_center">
         <div class="header1">
           <span class="title"> 输入密码 </span>
-          <img src="../public/close.svg" @click="handleCancel">
+          <img src="../public/close.svg" @click="handleCancel" />
         </div>
         <div class="content">
-          <a-input-password id="pwd" v-model:value="password" class="inputBox" placeholder="请输入密码" />
+          <a-input-password
+            id="pwd"
+            v-model:value="password"
+            class="inputBox"
+            placeholder="请输入密码"
+          />
         </div>
         <div class="footer">
-          <a-button class="btn1" @click="handleCancel">
-            取消
-          </a-button>
-          <a-button class="btn2" @click="handleOk">
-            确定
-          </a-button>
+          <a-button class="btn1" @click="handleCancel"> 取消 </a-button>
+          <a-button class="btn2" @click="handleOk"> 确定 </a-button>
         </div>
       </div>
     </div>
@@ -2031,119 +2043,119 @@ onMounted(() => {
 
 <style scoped>
 .mask_box {
-    background-color: rgba(0, 0, 0, 0.6);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000002;
+  position: fixed;
+  top: 0px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  .mask_center {
     z-index: 10000002;
-    position: fixed;
-    top: 0px;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    .mask_center {
-      z-index: 10000002;
-        width: 460px;
-        height: 232px;
-        background: #ffffff;
-        border-radius: 4px;
-        padding: 23px 23px 24px 24px;
-        .header1 {
-            width: 100%;
-            display: flex;
-            margin-bottom: 22px;
-            justify-content: space-between;
-            .title {
-                font-size: 18px;
-                font-family: PingFangSC-Medium, PingFang SC;
-                font-weight: 600;
-                color: #000000;
-                line-height: 25px;
-            }
-            img:hover {
-                cursor: pointer;
-            }
-        }
-        .content {
-            :deep(.ant-input-affix-wrapper-focused) {
-                border: 1px solid #0268d6;
-                border-color: #0268d6;
-                box-shadow: none;
-            }
-            .inputBox {
-                margin-top: 16px;
-                height: 46px;
-                width: 100%;
-                background: rgba(0, 0, 0, 0.06);
-                border-radius: 6px;
-                border: 1px solid transparent;
-                padding: 12px 16px;
-            }
-            .inputBox:hover {
-                border: 1px solid #0268d6;
-            }
-            :deep(.ant-input) {
-                background-color: transparent;
-                font-size: 16px;
-                font-family: PingFangSC-Regular, PingFang SC;
-                font-weight: 400;
-                color: #000;
-                line-height: 22px;
-            }
-            :deep(.ant-input-affix-wrapper) {
-                font-size: 18px;
-                color: #aaaaaa;
-            }
-        }
-        .footer {
-            margin-top: 40px;
-            display: flex;
-            gap: 16px;
-            justify-content: right;
-            .btn1,
-            .btn2 {
-                width: 80px;
-                height: 36px;
-                border-radius: 4px;
-                font-size: 14px;
-                font-family: PingFangSC-Medium, PingFang SC;
-                font-weight: 500;
-                line-height: 20px;
-            }
-            .btn1 {
-                border: 1px solid rgba(0, 0, 0, 0.2);
-                color: rgba(0, 0, 0, 0.85);
-            }
-            .btn1:hover {
-                border: 1px solid #0173ef;
-                color: #0173ef;
-            }
-            .btn2 {
-                border: 1px solid #0173ef;
-                background: #0173ef;
-                color: #fff;
-            }
-            .btn2:hover {
-                opacity: 0.8;
-            }
-        }
+    width: 460px;
+    height: 232px;
+    background: #ffffff;
+    border-radius: 4px;
+    padding: 23px 23px 24px 24px;
+    .header1 {
+      width: 100%;
+      display: flex;
+      margin-bottom: 22px;
+      justify-content: space-between;
+      .title {
+        font-size: 18px;
+        font-family: PingFangSC-Medium, PingFang SC;
+        font-weight: 600;
+        color: #000000;
+        line-height: 25px;
+      }
+      img:hover {
+        cursor: pointer;
+      }
     }
+    .content {
+      :deep(.ant-input-affix-wrapper-focused) {
+        border: 1px solid #0268d6;
+        border-color: #0268d6;
+        box-shadow: none;
+      }
+      .inputBox {
+        margin-top: 16px;
+        height: 46px;
+        width: 100%;
+        background: rgba(0, 0, 0, 0.06);
+        border-radius: 6px;
+        border: 1px solid transparent;
+        padding: 12px 16px;
+      }
+      .inputBox:hover {
+        border: 1px solid #0268d6;
+      }
+      :deep(.ant-input) {
+        background-color: transparent;
+        font-size: 16px;
+        font-family: PingFangSC-Regular, PingFang SC;
+        font-weight: 400;
+        color: #000;
+        line-height: 22px;
+      }
+      :deep(.ant-input-affix-wrapper) {
+        font-size: 18px;
+        color: #aaaaaa;
+      }
+    }
+    .footer {
+      margin-top: 40px;
+      display: flex;
+      gap: 16px;
+      justify-content: right;
+      .btn1,
+      .btn2 {
+        width: 80px;
+        height: 36px;
+        border-radius: 4px;
+        font-size: 14px;
+        font-family: PingFangSC-Medium, PingFang SC;
+        font-weight: 500;
+        line-height: 20px;
+      }
+      .btn1 {
+        border: 1px solid rgba(0, 0, 0, 0.2);
+        color: rgba(0, 0, 0, 0.85);
+      }
+      .btn1:hover {
+        border: 1px solid #0173ef;
+        color: #0173ef;
+      }
+      .btn2 {
+        border: 1px solid #0173ef;
+        background: #0173ef;
+        color: #fff;
+      }
+      .btn2:hover {
+        opacity: 0.8;
+      }
+    }
+  }
 }
 .fade-enter-from,
 .fade-leave-to {
-    opacity: 0;
+  opacity: 0;
 }
 
 .fade-enter-to,
 .fade-leave-from {
-    opacity: 1;
+  opacity: 1;
 }
 
 .fade-enter-active {
-    transition: opacity 0.4s ease;
+  transition: opacity 0.4s ease;
 }
 .fade-leave-active {
-    transition: opacity 0.1s ease;
+  transition: opacity 0.1s ease;
 }
 .page {
   width: 1920px;
@@ -2224,8 +2236,38 @@ onMounted(() => {
 
     .right {
       .razing {
-        width: 474px;
-        height: 200px;
+        margin-left: 60px;
+        width: 276px;
+        height: 198px;
+        background: url(../src/assets/razing.png) no-repeat;
+        background-size: 100% 100%;
+        .number {
+          font-size: 14px;
+          font-family: Source Han Sans CN;
+          font-weight: 400;
+          color: #f5b436;
+          line-height: 15px;
+        }
+        .level {
+          font-size: 14px;
+          font-family: Source Han Sans CN;
+          font-weight: 400;
+          color: #bac0ca;
+          line-height: 15px;
+          margin-left: 10px;
+        }
+        .boxA {
+          padding-top: 29px;
+          padding-left: 65px;
+        }
+        .boxB {
+          padding-top: 39px;
+          padding-left: 35px;
+        }
+        .boxC {
+          padding-top: 44px;
+          padding-left: 4px;
+        }
       }
 
       .match-age {
@@ -2280,6 +2322,7 @@ onMounted(() => {
           align-items: center;
           .count {
             font-size: 20px;
+            line-height: 20px;
             font-family: PangMenZhengDao;
             font-weight: 400;
             color: #f5b436;
@@ -2290,8 +2333,7 @@ onMounted(() => {
             font-size: 14px;
             font-family: PingFang SC;
             font-weight: 400;
-            color: #ffffff;
-            opacity: 0.95;
+            color: #bac0ca;
           }
         }
       }
@@ -2374,10 +2416,36 @@ onMounted(() => {
       width: 85vw;
       height: 85vh;
       border: none !important;
-      -webkit-clip-path: polygon(1% 17%,8% 7%,19% 7%,29% 14%,45% 14%,56% 5%,81% 4%,94% 16%,94% 48%,84% 55%,13% 55%,1% 48%);
-      clip-path: polygon(2.4% 1.2%, 8.8% 1.2%, 9.7% 2.3%, 19% 2.3%, 19.6% 1.2%, 97.5% 1.2%, 99.35% 4.4%, 99.35% 95.4%, 97.5% 98.75%, 2.4% 98.75%,0.65% 95.5%, 0.65% 4.4%);
+      -webkit-clip-path: polygon(
+        1% 17%,
+        8% 7%,
+        19% 7%,
+        29% 14%,
+        45% 14%,
+        56% 5%,
+        81% 4%,
+        94% 16%,
+        94% 48%,
+        84% 55%,
+        13% 55%,
+        1% 48%
+      );
+      clip-path: polygon(
+        2.4% 1.2%,
+        8.8% 1.2%,
+        9.7% 2.3%,
+        19% 2.3%,
+        19.6% 1.2%,
+        97.5% 1.2%,
+        99.35% 4.4%,
+        99.35% 95.4%,
+        97.5% 98.75%,
+        2.4% 98.75%,
+        0.65% 95.5%,
+        0.65% 4.4%
+      );
     }
-    .mask{
+    .mask {
       z-index: 1;
       width: 85vw;
       height: 85vh;
@@ -2400,7 +2468,7 @@ onMounted(() => {
       }
     }
   }
-  .matchName :hover{
+  .matchName :hover {
     cursor: pointer;
   }
 }

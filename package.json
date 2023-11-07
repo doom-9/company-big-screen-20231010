@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "deploy-prod": "node scripts/deploy-prod.cjs"
+    "deploy-prod": "node scripts/deploy-prod.cjs",
+    "deploy-prod2": "node scripts/deploy-prod2.cjs"
   },
   "dependencies": {
     "echarts": "^5.4.3",
